@@ -21,7 +21,6 @@ namespace SimEngine.AuctionHouse
 
             // Generate a random winning bids ceiling
             int winningBidsCeiling = _random.Next(_params.NumberOfWinningBidsLow, _params.NumberOfWinningBidsHigh + 1);
-            Console.WriteLine($"@ AuctionHouse: May win up to {winningBidsCeiling} {(winningBidsCeiling == 1 ? "car" : "cars")} this visit");
 
             // Let the bidding begin
             for (var i = 0; i < winningBidsCeiling; i++)
@@ -29,7 +28,6 @@ namespace SimEngine.AuctionHouse
                 // Purchased max cars already?
                 if (carsOnHand + carsPurchased.Count >= _params.MaxInventory)
                 {
-                    Console.WriteLine($"@ AuctionHouse: At max inventory ({_params.MaxInventory}), done purchasing at auction");
                     break;
                 }
 
@@ -42,17 +40,8 @@ namespace SimEngine.AuctionHouse
                     // Got it
                     carsPurchased.Add(new Car { TotalPurchaseAmount = totalPurchaseAmount });
                     cashOnHand = cashOnHand - totalPurchaseAmount;
-
-                    Console.WriteLine($"@ AuctionHouse: Purchased a car for ${totalPurchaseAmount}, cash on hand is now ${cashOnHand}");
-                }
-                else
-                {
-                    // Not enough cash
-                    Console.WriteLine($"@ AuctionHouse: Purchase amount is ${totalPurchaseAmount} but cash on hand is only ${cashOnHand}");
                 }
             }
-
-            Console.WriteLine();
 
             return carsPurchased;
         }

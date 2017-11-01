@@ -23,34 +23,33 @@ namespace SimEngine.Dealership
         }
 
         // Turn the machine
-        public void Crank()
+        public void Crank(int weekNumber)
         {
             // Sell 'em if ya can
             var carsSold = SellCars(_currentInventory, _params, _random);
 
             // Remove cars sold at dealership from inventory and add entries to ledger
-            carsSold.ForEach(result => _ledger.AddEntry(EntryDirection.CREDIT, EntryType.CAR_SALE, result.Car.TotalPurchaseAmount + result.Profit));
+            carsSold.ForEach(result => _ledger.AddEntry(EntryDirection.CREDIT, EntryType.CAR_SALE, weekNumber, result.Car.TotalPurchaseAmount + result.Profit));
             carsSold.ForEach(result => _currentInventory.Remove(result.Car));
 
             // Visit the auction
             var carsPurchased = _auctionHouse.Buy(_ledger.GetCurrentCashOnHand(), _currentInventory.Count);
 
             // Add cars purchased at auction to ledger and inventory
-            carsPurchased.ForEach(car => _ledger.AddEntry(EntryDirection.DEBIT, EntryType.CAR_PURCHASE, car.TotalPurchaseAmount));
+            carsPurchased.ForEach(car => _ledger.AddEntry(EntryDirection.DEBIT, EntryType.CAR_PURCHASE, weekNumber, car.TotalPurchaseAmount));
             carsPurchased.ForEach(car => _currentInventory.Add(car));
 
             // Deduct personal expenses
-            Console.WriteLine($"Deducting ${_params.WeeklyPersonalExpenses} for personal expenses");
-            _ledger.AddEntry(EntryDirection.DEBIT, EntryType.PERSONAL_EXPENSES, _params.WeeklyPersonalExpenses);
+            _ledger.AddEntry(EntryDirection.DEBIT, EntryType.PERSONAL_EXPENSES, weekNumber, _params.WeeklyPersonalExpenses);
 
             // Age the inventory
             _currentInventory.ForEach(car => car.WeeksInInventory += 1);
         }
 
-        public List<Car> GetCurrentInventory()
-        {
-            return _currentInventory;
-        }
+        // Simple getters
+        public DealershipParameters GetParameters() => _params;
+        public List<Car> GetCurrentInventory() => _currentInventory;
+        public ILedger GetLedger() => _ledger;
 
         // Pass-through method: Get current cash on hand
         public int GetCurrentCashOnHand()
@@ -79,8 +78,6 @@ namespace SimEngine.Dealership
 
                     // Add sale to results
                     results.Add(new SalesResult { Car = car, Profit = saleProfit });
-
-                    Console.WriteLine($"$ Sold a car for ${car.TotalPurchaseAmount + saleProfit} (${saleProfit} profit)");
                 }
             }
 

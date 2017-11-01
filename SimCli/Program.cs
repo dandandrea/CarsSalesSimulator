@@ -48,25 +48,25 @@ namespace CarSalesModeler
             {
                 // Start of week report
                 Console.Write($">>> Start of week {weekNumber} [Cash: ${dealership.GetCurrentCashOnHand()}");
-                Console.WriteLine($", cars: {dealership.CurrentInventory.Count}]");
+                Console.WriteLine($", cars: {dealership.GetCurrentInventory().Count}]");
 
                 // Starting inventory
                 Console.WriteLine();
                 Console.WriteLine($"Beginning inventory");
                 Console.WriteLine($"-------------------");
-                foreach (var car in dealership.CurrentInventory)
+                foreach (var car in dealership.GetCurrentInventory())
                 {
                     Console.WriteLine($"* Purchased for ${car.TotalPurchaseAmount} {car.WeeksInInventory} {(car.WeeksInInventory == 1 ? "week" : "weeks")} ago");
                 }
                 Console.WriteLine();
 
                 // Do the week's business
-                dealership.Crank();
+                dealership.Crank(weekNumber);
 
                 // End of week report
                 Console.Write($">>> End of week {weekNumber} [");
                 Console.Write($"Cash ${dealership.GetCurrentCashOnHand()}");
-                Console.Write($", cars: {dealership.CurrentInventory.Count}");
+                Console.Write($", cars: {dealership.GetCurrentInventory().Count}");
                 Console.WriteLine($", rough profit per month: ${dealership.GetNetProfit() / weekNumber * 4.2}]");
                 Console.WriteLine();
                 Console.WriteLine($"ENTER Q TO QUIT");

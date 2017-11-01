@@ -8,15 +8,17 @@ namespace SimEngine.Ledger
         private readonly int _startingBalance;
         private readonly List<LedgerEntry> _ledgerEntries;
 
+        public List<LedgerEntry> GetEntries() => _ledgerEntries;
+
         public TypicalLedger(int startingBalance)
         {
             _startingBalance = startingBalance;
             _ledgerEntries = new List<LedgerEntry>();
         }
 
-        public void AddEntry(EntryDirection direction, EntryType entryType, int amount)
+        public void AddEntry(EntryDirection direction, EntryType entryType, int weekNumber, int amount)
         {
-            _ledgerEntries.Add(new LedgerEntry { Direction = direction, Type = entryType, Amount = amount });
+            _ledgerEntries.Add(new LedgerEntry { Direction = direction, Type = entryType, WeekNumber = weekNumber, Amount = amount });
         }
 
         public int GetCurrentCashOnHand()

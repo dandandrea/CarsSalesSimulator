@@ -59,6 +59,7 @@
             this.currentInventoryTextBox = new System.Windows.Forms.TextBox();
             this.currentInventoryLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.ledgerTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -347,14 +348,24 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Location = new System.Drawing.Point(12, 510);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(967, 176);
+            this.panel3.Size = new System.Drawing.Size(488, 176);
             this.panel3.TabIndex = 48;
+            // 
+            // ledgerTextBox
+            // 
+            this.ledgerTextBox.Location = new System.Drawing.Point(506, 510);
+            this.ledgerTextBox.Multiline = true;
+            this.ledgerTextBox.Name = "ledgerTextBox";
+            this.ledgerTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ledgerTextBox.Size = new System.Drawing.Size(473, 176);
+            this.ledgerTextBox.TabIndex = 49;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 698);
+            this.Controls.Add(this.ledgerTextBox);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -365,6 +376,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -400,5 +412,6 @@
         private System.Windows.Forms.TextBox currentInventoryTextBox;
         private System.Windows.Forms.Label currentInventoryLabel;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox ledgerTextBox;
     }
 }

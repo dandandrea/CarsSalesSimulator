@@ -1,6 +1,5 @@
 ﻿using SimEngine.AuctionHouse;
 using SimEngine.Dealership;
-using SimEngine.Ledger;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,7 +10,6 @@ namespace SimGui
     {
         private IDealership _dealership;
         private IAuctionHouse _auctionHouse;
-        private ILedger _ledger;
 
         private bool _started = false;
 
@@ -64,31 +62,39 @@ namespace SimGui
             InitializeDealership();
             UpdateLotDisplay();
 
-            // Go ahead and simulate the first week
-            _dealership.Crank();
-            UpdateLotDisplay();
-
-            // Update display
-            UpdateDealershipDisplayValues();
-        }
-
-        private void UpdateDealershipDisplayValues()
-        {
-            currentCashTextBox.Text = $"{_dealership.GetCurrentCashOnHand()}";
-            currentInventoryTextBox.Text = $"{_dealership.GetCurrentInventory().Count}";
+            // Simulate the first week
+            Crank();
         }
 
         private void nextWeekButton_Click(object sender, EventArgs e)
         {
+            Crank();
+        }
+
+        private void Crank()
+        {
             // Increment the week number
-            weekNumberTextBox.Text = $"{Int32.Parse(weekNumberTextBox.Text) + 1}";
+            var weekNumber = Int32.Parse(weekNumberTextBox.Text) + 1;
+            weekNumberTextBox.Text = $"{weekNumber}";
 
             // Simulate another week
-            _dealership.Crank();
+            _dealership.Crank(weekNumber);
 
             // Update display
             UpdateDealershipDisplayValues();
             UpdateLotDisplay();
+            UpdateLedgerDisplay();
+        }
+
+        private void UpdateLedgerDisplay()
+        {
+            foreach (var entry in _dealership.GetLedger().GetEntries())
+            {
+                if (entry.WeekNumber == Int32.Parse(weekNumberTextBox.Text))
+                {
+                    ledgerTextBox.AppendText($"{entry}\n");
+                }
+            }
         }
 
         private void UpdateLotDisplay()
@@ -101,12 +107,34 @@ namespace SimGui
                 // Redraw the lot
                 for (var i = 0; i < _dealership.GetCurrentInventory().Count; i++)
                 {
+                    var car = _dealership.GetCurrentInventory()[i];
+
+                    var pen = Pens.White;
+                    var brush = Brushes.White;
+                    if (car.WeeksInInventory == _dealership.GetParameters().MaxWeeksForCarToSell - 1)
+                    {
+                        pen = Pens.Yellow;
+                        brush = Brushes.Yellow;
+                    }
+                    else if (car.WeeksInInventory == _dealership.GetParameters().MaxWeeksForCarToSell)
+                    {
+                        pen = Pens.Green;
+                        brush = Brushes.Green;
+                    }
+
                     var x = 10 + 50 * i;
                     var y = 10;
-                    g.DrawRectangle(Pens.White, x, y, 25, 25);
-                    g.DrawString($"{_dealership.GetCurrentInventory()[i].WeeksInInventory}", SystemFonts.DefaultFont, Brushes.White, x + 8, y + 5);
+
+                    g.DrawRectangle(pen, x, y, 25, 25);
+                    g.DrawString($"{car.WeeksInInventory}", SystemFonts.DefaultFont, brush, x + 8, y + 5);
                 }
             }
+        }
+
+        private void UpdateDealershipDisplayValues()
+        {
+            currentCashTextBox.Text = $"{_dealership.GetCurrentCashOnHand()}";
+            currentInventoryTextBox.Text = $"{_dealership.GetCurrentInventory().Count}";
         }
 
         private void InitializeDealership()
@@ -154,7 +182,7 @@ namespace SimGui
             nextWeekButton.Enabled = true;
 
             // Initialize week number
-            weekNumberTextBox.Text = "1";
+            weekNumberTextBox.Text = "0";
         }
 
         private void SetControlsToStoppedState()
