@@ -4,5 +4,6 @@
     {
         public int TotalPurchaseAmount { get; set; } = 0;
         public int WeeksInInventory { get; set; } = 0;
+        public int ProjectedProfit { get; set; }
     }
 }

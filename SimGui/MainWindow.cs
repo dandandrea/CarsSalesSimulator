@@ -2,6 +2,7 @@
 using SimEngine.Dealership;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SimGui
@@ -78,23 +79,27 @@ namespace SimGui
             weekNumberTextBox.Text = $"{weekNumber}";
 
             // Simulate another week
-            _dealership.Crank(weekNumber);
+            var weeklyResult = _dealership.Crank(weekNumber);
 
             // Update display
-            UpdateDealershipDisplayValues();
+            UpdateDealershipDisplayValues(weeklyResult);
             UpdateLotDisplay();
             UpdateLedgerDisplay();
         }
 
         private void UpdateLedgerDisplay()
         {
-            foreach (var entry in _dealership.GetLedger().GetEntries())
+            ledgerTextBox.AppendText($"Week {weekNumberTextBox.Text}\n");
+
+            foreach (var entry in _dealership.GetLedger().GetEntries().Where(x => x.WeekNumber == Int32.Parse(weekNumberTextBox.Text)))
             {
-                if (entry.WeekNumber == Int32.Parse(weekNumberTextBox.Text))
-                {
-                    ledgerTextBox.AppendText($"{entry}\n");
-                }
+                var color = entry.Direction == SimEngine.Ledger.EntryDirection.CREDIT ? Color.Green : Color.OrangeRed;
+                ledgerTextBox.SelectionColor = color;
+                ledgerTextBox.AppendText($"{entry}\n");
             }
+
+            ledgerTextBox.AppendText("\n");
+            ledgerTextBox.ScrollToCaret();
         }
 
         private void UpdateLotDisplay()
@@ -131,10 +136,13 @@ namespace SimGui
             }
         }
 
-        private void UpdateDealershipDisplayValues()
+        private void UpdateDealershipDisplayValues(WeeklyResult weeklyResult)
         {
-            currentCashTextBox.Text = $"{_dealership.GetCurrentCashOnHand()}";
+            currentCashTextBox.Text = $"{weeklyResult.CashOnHand}";
             currentInventoryTextBox.Text = $"{_dealership.GetCurrentInventory().Count}";
+            currentCashLockedTextbox.Text = $"{weeklyResult.CashLockedUp}";
+            currentTotalAssetsTextbox.Text = $"{weeklyResult.TotalAssets}";
+            totalPersonalBurnTextbox.Text = $"{Int32.Parse(weekNumberTextBox.Text) * _dealership.GetParameters().WeeklyPersonalExpenses}";
         }
 
         private void InitializeDealership()
@@ -191,6 +199,10 @@ namespace SimGui
             weekNumberTextBox.Text = "";
             currentInventoryTextBox.Text = "";
             currentCashTextBox.Text = "";
+            currentCashLockedTextbox.Text = "";
+            currentTotalAssetsTextbox.Text = "";
+            totalPersonalBurnTextbox.Text = "";
+            ledgerTextBox.Text = "";
 
             // Enable text boxes
             startingCashTextBox.Enabled = true;

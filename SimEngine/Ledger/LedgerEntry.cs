@@ -9,18 +9,18 @@
 
         public override string ToString()
         {
-            var s = $"Week {WeekNumber}: ";
+            string s = "";
 
             switch (Type)
             {
                 case EntryType.CAR_PURCHASE:
-                    s += $"Bought a car for ${Amount}";
+                    s = $"Bought a car for ${Amount}";
                     break;
                 case EntryType.CAR_SALE:
-                    s += $"Sold a car for ${Amount}";
+                    s = $"Sold a car for ${Amount}";
                     break;
                 case EntryType.PERSONAL_EXPENSES:
-                    s += $"Deducted ${Amount} for personal expenses";
+                    s = $"Deducted ${Amount} for personal expenses";
                     break;
             }
 

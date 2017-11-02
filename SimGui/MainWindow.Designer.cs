@@ -56,36 +56,49 @@
             this.startingCashTextBox = new System.Windows.Forms.TextBox();
             this.startingCashLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.currentCashLockedTextbox = new System.Windows.Forms.TextBox();
+            this.currentTotalAssetsLabel = new System.Windows.Forms.Label();
+            this.currentTotalAssetsTextbox = new System.Windows.Forms.TextBox();
+            this.currentCashLockedLabel = new System.Windows.Forms.Label();
             this.currentInventoryTextBox = new System.Windows.Forms.TextBox();
             this.currentInventoryLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.ledgerTextBox = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ledgerTextBox = new System.Windows.Forms.RichTextBox();
+            this.totalPersonalBurnLabel = new System.Windows.Forms.Label();
+            this.totalPersonalBurnTextbox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // currentCashLabel
             // 
             this.currentCashLabel.AutoSize = true;
-            this.currentCashLabel.Location = new System.Drawing.Point(145, 22);
+            this.currentCashLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentCashLabel.Location = new System.Drawing.Point(248, 22);
             this.currentCashLabel.Name = "currentCashLabel";
-            this.currentCashLabel.Size = new System.Drawing.Size(145, 17);
+            this.currentCashLabel.Size = new System.Drawing.Size(165, 17);
             this.currentCashLabel.TabIndex = 3;
             this.currentCashLabel.Text = "Current cash on hand";
             // 
             // currentCashTextBox
             // 
-            this.currentCashTextBox.Location = new System.Drawing.Point(296, 19);
+            this.currentCashTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentCashTextBox.Location = new System.Drawing.Point(423, 19);
             this.currentCashTextBox.Name = "currentCashTextBox";
             this.currentCashTextBox.ReadOnly = true;
-            this.currentCashTextBox.Size = new System.Drawing.Size(100, 22);
+            this.currentCashTextBox.Size = new System.Drawing.Size(88, 22);
             this.currentCashTextBox.TabIndex = 4;
             // 
             // nextWeekButton
             // 
             this.nextWeekButton.BackColor = System.Drawing.Color.Green;
             this.nextWeekButton.Enabled = false;
-            this.nextWeekButton.Location = new System.Drawing.Point(18, 59);
+            this.nextWeekButton.Location = new System.Drawing.Point(18, 80);
             this.nextWeekButton.Name = "nextWeekButton";
             this.nextWeekButton.Size = new System.Drawing.Size(88, 38);
             this.nextWeekButton.TabIndex = 5;
@@ -95,20 +108,22 @@
             // 
             // weekNumberTextBox
             // 
-            this.weekNumberTextBox.Location = new System.Drawing.Point(65, 19);
+            this.weekNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weekNumberTextBox.Location = new System.Drawing.Point(86, 19);
             this.weekNumberTextBox.Name = "weekNumberTextBox";
             this.weekNumberTextBox.ReadOnly = true;
-            this.weekNumberTextBox.Size = new System.Drawing.Size(49, 22);
+            this.weekNumberTextBox.Size = new System.Drawing.Size(46, 22);
             this.weekNumberTextBox.TabIndex = 7;
             // 
             // weekNumberLabel
             // 
             this.weekNumberLabel.AutoSize = true;
+            this.weekNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.weekNumberLabel.Location = new System.Drawing.Point(15, 22);
             this.weekNumberLabel.Name = "weekNumberLabel";
-            this.weekNumberLabel.Size = new System.Drawing.Size(44, 17);
+            this.weekNumberLabel.Size = new System.Drawing.Size(62, 17);
             this.weekNumberLabel.TabIndex = 6;
-            this.weekNumberLabel.Text = "Week";
+            this.weekNumberLabel.Text = "Week #";
             // 
             // panel1
             // 
@@ -141,7 +156,7 @@
             // 
             // personalExpensesTextBox
             // 
-            this.personalExpensesTextBox.Location = new System.Drawing.Point(345, 105);
+            this.personalExpensesTextBox.Location = new System.Drawing.Point(364, 105);
             this.personalExpensesTextBox.Name = "personalExpensesTextBox";
             this.personalExpensesTextBox.Size = new System.Drawing.Size(100, 22);
             this.personalExpensesTextBox.TabIndex = 46;
@@ -151,15 +166,15 @@
             this.personalExpensesLabel.AutoSize = true;
             this.personalExpensesLabel.Location = new System.Drawing.Point(248, 108);
             this.personalExpensesLabel.Name = "personalExpensesLabel";
-            this.personalExpensesLabel.Size = new System.Drawing.Size(76, 17);
+            this.personalExpensesLabel.Size = new System.Drawing.Size(109, 17);
             this.personalExpensesLabel.TabIndex = 45;
-            this.personalExpensesLabel.Text = "Personal $";
+            this.personalExpensesLabel.Text = "Personal burn $";
             // 
             // weeksToSellTextBox
             // 
             this.weeksToSellTextBox.Location = new System.Drawing.Point(112, 105);
             this.weeksToSellTextBox.Name = "weeksToSellTextBox";
-            this.weeksToSellTextBox.Size = new System.Drawing.Size(100, 22);
+            this.weeksToSellTextBox.Size = new System.Drawing.Size(46, 22);
             this.weeksToSellTextBox.TabIndex = 44;
             // 
             // weeksToSellLabel
@@ -189,7 +204,7 @@
             // 
             // lowWinningBidAmountTextBox
             // 
-            this.lowWinningBidAmountTextBox.Location = new System.Drawing.Point(584, 61);
+            this.lowWinningBidAmountTextBox.Location = new System.Drawing.Point(595, 61);
             this.lowWinningBidAmountTextBox.Name = "lowWinningBidAmountTextBox";
             this.lowWinningBidAmountTextBox.Size = new System.Drawing.Size(100, 22);
             this.lowWinningBidAmountTextBox.TabIndex = 40;
@@ -197,7 +212,7 @@
             // lowWinningBidAmountLabel
             // 
             this.lowWinningBidAmountLabel.AutoSize = true;
-            this.lowWinningBidAmountLabel.Location = new System.Drawing.Point(487, 64);
+            this.lowWinningBidAmountLabel.Location = new System.Drawing.Point(498, 64);
             this.lowWinningBidAmountLabel.Name = "lowWinningBidAmountLabel";
             this.lowWinningBidAmountLabel.Size = new System.Drawing.Size(92, 17);
             this.lowWinningBidAmountLabel.TabIndex = 39;
@@ -221,7 +236,7 @@
             // 
             // profitLowTextBox
             // 
-            this.profitLowTextBox.Location = new System.Drawing.Point(584, 20);
+            this.profitLowTextBox.Location = new System.Drawing.Point(595, 20);
             this.profitLowTextBox.Name = "profitLowTextBox";
             this.profitLowTextBox.Size = new System.Drawing.Size(100, 22);
             this.profitLowTextBox.TabIndex = 36;
@@ -229,7 +244,7 @@
             // profitLowLabel
             // 
             this.profitLowLabel.AutoSize = true;
-            this.profitLowLabel.Location = new System.Drawing.Point(487, 23);
+            this.profitLowLabel.Location = new System.Drawing.Point(498, 23);
             this.profitLowLabel.Name = "profitLowLabel";
             this.profitLowLabel.Size = new System.Drawing.Size(65, 17);
             this.profitLowLabel.TabIndex = 35;
@@ -237,9 +252,9 @@
             // 
             // winningBidsHighTextBox
             // 
-            this.winningBidsHighTextBox.Location = new System.Drawing.Point(345, 61);
+            this.winningBidsHighTextBox.Location = new System.Drawing.Point(364, 61);
             this.winningBidsHighTextBox.Name = "winningBidsHighTextBox";
-            this.winningBidsHighTextBox.Size = new System.Drawing.Size(100, 22);
+            this.winningBidsHighTextBox.Size = new System.Drawing.Size(47, 22);
             this.winningBidsHighTextBox.TabIndex = 34;
             // 
             // winningBidsHighLabel
@@ -255,7 +270,7 @@
             // 
             this.winningBidsLowTextBox.Location = new System.Drawing.Point(112, 61);
             this.winningBidsLowTextBox.Name = "winningBidsLowTextBox";
-            this.winningBidsLowTextBox.Size = new System.Drawing.Size(100, 22);
+            this.winningBidsLowTextBox.Size = new System.Drawing.Size(46, 22);
             this.winningBidsLowTextBox.TabIndex = 32;
             // 
             // winningBidsLowLabel
@@ -269,9 +284,9 @@
             // 
             // maxInventoryTextBox
             // 
-            this.maxInventoryTextBox.Location = new System.Drawing.Point(345, 20);
+            this.maxInventoryTextBox.Location = new System.Drawing.Point(364, 20);
             this.maxInventoryTextBox.Name = "maxInventoryTextBox";
-            this.maxInventoryTextBox.Size = new System.Drawing.Size(100, 22);
+            this.maxInventoryTextBox.Size = new System.Drawing.Size(47, 22);
             this.maxInventoryTextBox.TabIndex = 30;
             // 
             // maxInventoryLabel
@@ -312,7 +327,12 @@
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.totalPersonalBurnLabel);
+            this.panel2.Controls.Add(this.totalPersonalBurnTextbox);
+            this.panel2.Controls.Add(this.currentCashLockedTextbox);
+            this.panel2.Controls.Add(this.currentTotalAssetsLabel);
+            this.panel2.Controls.Add(this.currentTotalAssetsTextbox);
+            this.panel2.Controls.Add(this.currentCashLockedLabel);
             this.panel2.Controls.Add(this.currentInventoryTextBox);
             this.panel2.Controls.Add(this.currentInventoryLabel);
             this.panel2.Controls.Add(this.nextWeekButton);
@@ -320,54 +340,148 @@
             this.panel2.Controls.Add(this.currentCashLabel);
             this.panel2.Controls.Add(this.weekNumberLabel);
             this.panel2.Controls.Add(this.currentCashTextBox);
-            this.panel2.Location = new System.Drawing.Point(12, 216);
+            this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(967, 288);
+            this.panel2.Size = new System.Drawing.Size(947, 166);
             this.panel2.TabIndex = 47;
+            // 
+            // currentCashLockedTextbox
+            // 
+            this.currentCashLockedTextbox.Location = new System.Drawing.Point(423, 88);
+            this.currentCashLockedTextbox.Name = "currentCashLockedTextbox";
+            this.currentCashLockedTextbox.ReadOnly = true;
+            this.currentCashLockedTextbox.Size = new System.Drawing.Size(88, 22);
+            this.currentCashLockedTextbox.TabIndex = 15;
+            // 
+            // currentTotalAssetsLabel
+            // 
+            this.currentTotalAssetsLabel.AutoSize = true;
+            this.currentTotalAssetsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTotalAssetsLabel.Location = new System.Drawing.Point(248, 128);
+            this.currentTotalAssetsLabel.Name = "currentTotalAssetsLabel";
+            this.currentTotalAssetsLabel.Size = new System.Drawing.Size(151, 17);
+            this.currentTotalAssetsLabel.TabIndex = 14;
+            this.currentTotalAssetsLabel.Text = "Current total assets";
+            // 
+            // currentTotalAssetsTextbox
+            // 
+            this.currentTotalAssetsTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentTotalAssetsTextbox.Location = new System.Drawing.Point(423, 125);
+            this.currentTotalAssetsTextbox.Name = "currentTotalAssetsTextbox";
+            this.currentTotalAssetsTextbox.ReadOnly = true;
+            this.currentTotalAssetsTextbox.Size = new System.Drawing.Size(88, 22);
+            this.currentTotalAssetsTextbox.TabIndex = 13;
+            // 
+            // currentCashLockedLabel
+            // 
+            this.currentCashLockedLabel.AutoSize = true;
+            this.currentCashLockedLabel.Location = new System.Drawing.Point(248, 91);
+            this.currentCashLockedLabel.Name = "currentCashLockedLabel";
+            this.currentCashLockedLabel.Size = new System.Drawing.Size(154, 17);
+            this.currentCashLockedLabel.TabIndex = 12;
+            this.currentCashLockedLabel.Text = "Current cash locked up";
             // 
             // currentInventoryTextBox
             // 
-            this.currentInventoryTextBox.Location = new System.Drawing.Point(554, 19);
+            this.currentInventoryTextBox.Location = new System.Drawing.Point(423, 52);
             this.currentInventoryTextBox.Name = "currentInventoryTextBox";
             this.currentInventoryTextBox.ReadOnly = true;
-            this.currentInventoryTextBox.Size = new System.Drawing.Size(49, 22);
+            this.currentInventoryTextBox.Size = new System.Drawing.Size(46, 22);
             this.currentInventoryTextBox.TabIndex = 9;
             // 
             // currentInventoryLabel
             // 
             this.currentInventoryLabel.AutoSize = true;
-            this.currentInventoryLabel.Location = new System.Drawing.Point(431, 22);
+            this.currentInventoryLabel.Location = new System.Drawing.Point(248, 55);
             this.currentInventoryLabel.Name = "currentInventoryLabel";
-            this.currentInventoryLabel.Size = new System.Drawing.Size(117, 17);
+            this.currentInventoryLabel.Size = new System.Drawing.Size(86, 17);
             this.currentInventoryLabel.TabIndex = 8;
-            this.currentInventoryLabel.Text = "Current inventory";
+            this.currentInventoryLabel.Text = "# cars on lot";
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Black;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(12, 510);
+            this.panel3.Location = new System.Drawing.Point(6, 178);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(488, 176);
+            this.panel3.Size = new System.Drawing.Size(477, 271);
             this.panel3.TabIndex = 48;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(9, 216);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(979, 491);
+            this.tabControl1.TabIndex = 47;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage1.Controls.Add(this.ledgerTextBox);
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.panel3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(971, 462);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Interactive";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(964, 462);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Plot";
             // 
             // ledgerTextBox
             // 
-            this.ledgerTextBox.Location = new System.Drawing.Point(506, 510);
-            this.ledgerTextBox.Multiline = true;
+            this.ledgerTextBox.BackColor = System.Drawing.Color.Black;
+            this.ledgerTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ledgerTextBox.ForeColor = System.Drawing.Color.White;
+            this.ledgerTextBox.Location = new System.Drawing.Point(489, 178);
             this.ledgerTextBox.Name = "ledgerTextBox";
-            this.ledgerTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ledgerTextBox.Size = new System.Drawing.Size(473, 176);
-            this.ledgerTextBox.TabIndex = 49;
+            this.ledgerTextBox.ReadOnly = true;
+            this.ledgerTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.ledgerTextBox.Size = new System.Drawing.Size(464, 271);
+            this.ledgerTextBox.TabIndex = 16;
+            this.ledgerTextBox.Text = "";
+            // 
+            // totalPersonalBurnLabel
+            // 
+            this.totalPersonalBurnLabel.AutoSize = true;
+            this.totalPersonalBurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPersonalBurnLabel.Location = new System.Drawing.Point(550, 22);
+            this.totalPersonalBurnLabel.Name = "totalPersonalBurnLabel";
+            this.totalPersonalBurnLabel.Size = new System.Drawing.Size(144, 17);
+            this.totalPersonalBurnLabel.TabIndex = 16;
+            this.totalPersonalBurnLabel.Text = "Total personal burn $";
+            // 
+            // totalPersonalBurnTextbox
+            // 
+            this.totalPersonalBurnTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPersonalBurnTextbox.Location = new System.Drawing.Point(701, 19);
+            this.totalPersonalBurnTextbox.Name = "totalPersonalBurnTextbox";
+            this.totalPersonalBurnTextbox.ReadOnly = true;
+            this.totalPersonalBurnTextbox.Size = new System.Drawing.Size(88, 22);
+            this.totalPersonalBurnTextbox.TabIndex = 17;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 698);
-            this.Controls.Add(this.ledgerTextBox);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1004, 723);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Name = "MainWindow";
             this.Text = "Car Sales Simulator";
@@ -375,8 +489,9 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -412,6 +527,15 @@
         private System.Windows.Forms.TextBox currentInventoryTextBox;
         private System.Windows.Forms.Label currentInventoryLabel;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox ledgerTextBox;
+        private System.Windows.Forms.Label currentCashLockedLabel;
+        private System.Windows.Forms.TextBox currentCashLockedTextbox;
+        private System.Windows.Forms.Label currentTotalAssetsLabel;
+        private System.Windows.Forms.TextBox currentTotalAssetsTextbox;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.RichTextBox ledgerTextBox;
+        private System.Windows.Forms.Label totalPersonalBurnLabel;
+        private System.Windows.Forms.TextBox totalPersonalBurnTextbox;
     }
 }

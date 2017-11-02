@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using SimEngine.AuctionHouse;
 using SimEngine.Ledger;
@@ -23,19 +24,20 @@ namespace SimEngine.Dealership
         }
 
         // Turn the machine
-        public void Crank(int weekNumber)
+        public WeeklyResult Crank(int weekNumber)
         {
             // Sell 'em if ya can
             var carsSold = SellCars(_currentInventory, _params, _random);
 
             // Remove cars sold at dealership from inventory and add entries to ledger
-            carsSold.ForEach(result => _ledger.AddEntry(EntryDirection.CREDIT, EntryType.CAR_SALE, weekNumber, result.Car.TotalPurchaseAmount + result.Profit));
-            carsSold.ForEach(result => _currentInventory.Remove(result.Car));
+            carsSold.ForEach(car => _ledger.AddEntry(EntryDirection.CREDIT, EntryType.CAR_SALE, weekNumber, car.TotalPurchaseAmount + car.ProjectedProfit));
+            carsSold.ForEach(car => _currentInventory.Remove(car));
 
             // Visit the auction
             var carsPurchased = _auctionHouse.Buy(_ledger.GetCurrentCashOnHand(), _currentInventory.Count);
 
-            // Add cars purchased at auction to ledger and inventory
+            // Assign profit projections and add cars purchased at auction to ledger & inventory
+            carsPurchased.ForEach(car => car.ProjectedProfit = _random.Next(_params.SaleProfitLow, _params.SaleProfitHigh + 1));
             carsPurchased.ForEach(car => _ledger.AddEntry(EntryDirection.DEBIT, EntryType.CAR_PURCHASE, weekNumber, car.TotalPurchaseAmount));
             carsPurchased.ForEach(car => _currentInventory.Add(car));
 
@@ -44,6 +46,13 @@ namespace SimEngine.Dealership
 
             // Age the inventory
             _currentInventory.ForEach(car => car.WeeksInInventory += 1);
+
+            // Return WeeklyResult
+            return new WeeklyResult {
+                CashOnHand = _ledger.GetCurrentCashOnHand(),
+                CashLockedUp = _currentInventory.Sum(x => x.TotalPurchaseAmount),
+                TotalAssets = _currentInventory.Sum(x => x.TotalPurchaseAmount + x.ProjectedProfit)
+            };
         }
 
         // Simple getters
@@ -64,8 +73,8 @@ namespace SimEngine.Dealership
         }
 
         // Sell cars
-        private static List<SalesResult> SellCars(List<Car> currentInventory, DealershipParameters dealershipParams, Random random) {
-            var results = new List<SalesResult>();
+        private static List<Car> SellCars(List<Car> currentInventory, DealershipParameters dealershipParams, Random random) {
+            var results = new List<Car>();
 
             // Sell cars or increment their time in inventory
             foreach (var car in currentInventory)
@@ -73,11 +82,8 @@ namespace SimEngine.Dealership
                 // Sell car or increment its time in inventory
                 if (car.WeeksInInventory >= dealershipParams.MaxWeeksForCarToSell)
                 {
-                    // Generate random quantity for sale profit
-                    int saleProfit = random.Next(dealershipParams.SaleProfitLow, dealershipParams.SaleProfitHigh + 1);
-
                     // Add sale to results
-                    results.Add(new SalesResult { Car = car, Profit = saleProfit });
+                    results.Add(car);
                 }
             }
 

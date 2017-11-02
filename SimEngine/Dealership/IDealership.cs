@@ -5,7 +5,7 @@ namespace SimEngine.Dealership
 {
     public interface IDealership
     {
-        void Crank(int weekNumber);
+        WeeklyResult Crank(int weekNumber);
         List<Car> GetCurrentInventory();
         int GetCurrentCashOnHand();
         int GetNetProfit();
