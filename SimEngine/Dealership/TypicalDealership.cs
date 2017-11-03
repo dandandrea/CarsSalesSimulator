@@ -79,8 +79,11 @@ namespace SimEngine.Dealership
             // Sell cars or increment their time in inventory
             foreach (var car in currentInventory)
             {
-                // Sell car or increment its time in inventory
-                if (car.WeeksInInventory >= dealershipParams.MaxWeeksForCarToSell)
+                // Generate a random number of weeks
+                var randomNumberOfWeeks = random.Next(dealershipParams.WeeksForCarToSellLow, dealershipParams.WeeksForCarToSellHigh + 1);
+
+                // Sell car if ready
+                if (car.WeeksInInventory >= randomNumberOfWeeks)
                 {
                     // Add sale to results
                     results.Add(car);

@@ -14,16 +14,17 @@ namespace SimGui
 
         private bool _started = false;
 
-        private const int STARTING_BALANCE = 12000;
+        private const int STARTING_BALANCE = 17500;
         private const int SALE_PROFIT_LOW = 950;
         private const int SALE_PROFIT_HIGH = 1400;
-        private const int NUM_WINNING_BIDS_LOW = 1;
+        private const int NUM_WINNING_BIDS_LOW = 2;
         private const int NUM_WINNING_BIDS_HIGH = 6;
-        private const int TOTAL_PURCHASE_PRICE_LOW = 2000;
+        private const int TOTAL_PURCHASE_PRICE_LOW = 2500;
         private const int TOTAL_PURCHASE_PRICE_HIGH = 4000;
-        private const int MAX_INVENTORY = 5;
-        private const int MAX_WEEKS_FOR_CAR_TO_SELL = 3;
-        private const int WEEKLY_PERSONAL_EXPENSES = 500;
+        private const int MAX_INVENTORY = 6;
+        private const int WEEKS_FOR_CAR_TO_SELL_LOW = 3;
+        private const int WEEKS_FOR_CAR_TO_SELL_HIGH = 4;
+        private const int WEEKLY_PERSONAL_EXPENSES = 750;
 
         public MainWindow()
         {
@@ -114,24 +115,11 @@ namespace SimGui
                 {
                     var car = _dealership.GetCurrentInventory()[i];
 
-                    var pen = Pens.White;
-                    var brush = Brushes.White;
-                    if (car.WeeksInInventory == _dealership.GetParameters().MaxWeeksForCarToSell - 1)
-                    {
-                        pen = Pens.Yellow;
-                        brush = Brushes.Yellow;
-                    }
-                    else if (car.WeeksInInventory == _dealership.GetParameters().MaxWeeksForCarToSell)
-                    {
-                        pen = Pens.Green;
-                        brush = Brushes.Green;
-                    }
-
                     var x = 10 + 50 * i;
                     var y = 10;
 
-                    g.DrawRectangle(pen, x, y, 25, 25);
-                    g.DrawString($"{car.WeeksInInventory}", SystemFonts.DefaultFont, brush, x + 8, y + 5);
+                    g.DrawRectangle(Pens.White, x, y, 25, 25);
+                    g.DrawString($"{car.WeeksInInventory}", SystemFonts.DefaultFont, Brushes.White, x + 8, y + 5);
                 }
             }
         }
@@ -143,6 +131,7 @@ namespace SimGui
             currentCashLockedTextbox.Text = $"{weeklyResult.CashLockedUp}";
             currentTotalAssetsTextbox.Text = $"{weeklyResult.TotalAssets}";
             totalPersonalBurnTextbox.Text = $"{Int32.Parse(weekNumberTextBox.Text) * _dealership.GetParameters().WeeklyPersonalExpenses}";
+            cashPlusAssetsTextBox.Text = $"{weeklyResult.CashOnHand + weeklyResult.TotalAssets}";
         }
 
         private void InitializeDealership()
@@ -165,7 +154,8 @@ namespace SimGui
                 SaleProfitLow = Int32.Parse(profitLowTextBox.Text),
                 SaleProfitHigh = Int32.Parse(profitHighTextBox.Text),
                 WeeklyPersonalExpenses = Int32.Parse(personalExpensesTextBox.Text),
-                MaxWeeksForCarToSell = Int32.Parse(weeksToSellTextBox.Text)
+                WeeksForCarToSellLow = Int32.Parse(weeksToSellLowTextBox.Text),
+                WeeksForCarToSellHigh = Int32.Parse(weeksToSellHighTextBox.Text)
             };
             _dealership = new TypicalDealership(dealershipParams, _auctionHouse);
         }
@@ -181,7 +171,8 @@ namespace SimGui
             winningBidsHighTextBox.Enabled = false;
             lowWinningBidAmountTextBox.Enabled = false;
             highWinningBidAmountTextBox.Enabled = false;
-            weeksToSellTextBox.Enabled = false;
+            weeksToSellLowTextBox.Enabled = false;
+            weeksToSellHighTextBox.Enabled = false;
             personalExpensesTextBox.Enabled = false;
 
             // Buttons
@@ -202,6 +193,7 @@ namespace SimGui
             currentCashLockedTextbox.Text = "";
             currentTotalAssetsTextbox.Text = "";
             totalPersonalBurnTextbox.Text = "";
+            cashPlusAssetsTextBox.Text = "";
             ledgerTextBox.Text = "";
 
             // Enable text boxes
@@ -213,7 +205,8 @@ namespace SimGui
             winningBidsHighTextBox.Enabled = true;
             lowWinningBidAmountTextBox.Enabled = true;
             highWinningBidAmountTextBox.Enabled = true;
-            weeksToSellTextBox.Enabled = true;
+            weeksToSellLowTextBox.Enabled = true;
+            weeksToSellHighTextBox.Enabled = true;
             personalExpensesTextBox.Enabled = true;
 
             // Buttons
@@ -232,7 +225,8 @@ namespace SimGui
             winningBidsHighTextBox.Text = $"{NUM_WINNING_BIDS_HIGH}";
             lowWinningBidAmountTextBox.Text = $"{TOTAL_PURCHASE_PRICE_LOW}";
             highWinningBidAmountTextBox.Text = $"{TOTAL_PURCHASE_PRICE_HIGH}";
-            weeksToSellTextBox.Text = $"{MAX_WEEKS_FOR_CAR_TO_SELL}";
+            weeksToSellLowTextBox.Text = $"{WEEKS_FOR_CAR_TO_SELL_LOW}";
+            weeksToSellHighTextBox.Text = $"{WEEKS_FOR_CAR_TO_SELL_HIGH}";
             personalExpensesTextBox.Text = $"{WEEKLY_PERSONAL_EXPENSES}";
         }
     }

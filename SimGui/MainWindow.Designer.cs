@@ -34,10 +34,12 @@
             this.weekNumberTextBox = new System.Windows.Forms.TextBox();
             this.weekNumberLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.weeksToSellHighTextBox = new System.Windows.Forms.TextBox();
+            this.weeksToSellHighLabel = new System.Windows.Forms.Label();
             this.personalExpensesTextBox = new System.Windows.Forms.TextBox();
             this.personalExpensesLabel = new System.Windows.Forms.Label();
-            this.weeksToSellTextBox = new System.Windows.Forms.TextBox();
-            this.weeksToSellLabel = new System.Windows.Forms.Label();
+            this.weeksToSellLowTextBox = new System.Windows.Forms.TextBox();
+            this.weeksToSellLowLabel = new System.Windows.Forms.Label();
             this.highWinningBidAmountTextBox = new System.Windows.Forms.TextBox();
             this.highWinningBidAmountLabel = new System.Windows.Forms.Label();
             this.lowWinningBidAmountTextBox = new System.Windows.Forms.TextBox();
@@ -56,6 +58,8 @@
             this.startingCashTextBox = new System.Windows.Forms.TextBox();
             this.startingCashLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.totalPersonalBurnLabel = new System.Windows.Forms.Label();
+            this.totalPersonalBurnTextbox = new System.Windows.Forms.TextBox();
             this.currentCashLockedTextbox = new System.Windows.Forms.TextBox();
             this.currentTotalAssetsLabel = new System.Windows.Forms.Label();
             this.currentTotalAssetsTextbox = new System.Windows.Forms.TextBox();
@@ -65,10 +69,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ledgerTextBox = new System.Windows.Forms.RichTextBox();
-            this.totalPersonalBurnLabel = new System.Windows.Forms.Label();
-            this.totalPersonalBurnTextbox = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cashPlusAssetsLabel = new System.Windows.Forms.Label();
+            this.cashPlusAssetsTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -128,10 +132,12 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.weeksToSellHighTextBox);
+            this.panel1.Controls.Add(this.weeksToSellHighLabel);
             this.panel1.Controls.Add(this.personalExpensesTextBox);
             this.panel1.Controls.Add(this.personalExpensesLabel);
-            this.panel1.Controls.Add(this.weeksToSellTextBox);
-            this.panel1.Controls.Add(this.weeksToSellLabel);
+            this.panel1.Controls.Add(this.weeksToSellLowTextBox);
+            this.panel1.Controls.Add(this.weeksToSellLowLabel);
             this.panel1.Controls.Add(this.highWinningBidAmountTextBox);
             this.panel1.Controls.Add(this.highWinningBidAmountLabel);
             this.panel1.Controls.Add(this.lowWinningBidAmountTextBox);
@@ -154,9 +160,25 @@
             this.panel1.Size = new System.Drawing.Size(967, 198);
             this.panel1.TabIndex = 26;
             // 
+            // weeksToSellHighTextBox
+            // 
+            this.weeksToSellHighTextBox.Location = new System.Drawing.Point(395, 105);
+            this.weeksToSellHighTextBox.Name = "weeksToSellHighTextBox";
+            this.weeksToSellHighTextBox.Size = new System.Drawing.Size(46, 22);
+            this.weeksToSellHighTextBox.TabIndex = 48;
+            // 
+            // weeksToSellHighLabel
+            // 
+            this.weeksToSellHighLabel.AutoSize = true;
+            this.weeksToSellHighLabel.Location = new System.Drawing.Point(267, 108);
+            this.weeksToSellHighLabel.Name = "weeksToSellHighLabel";
+            this.weeksToSellHighLabel.Size = new System.Drawing.Size(112, 17);
+            this.weeksToSellHighLabel.TabIndex = 47;
+            this.weeksToSellHighLabel.Text = "Weeks/sale high";
+            // 
             // personalExpensesTextBox
             // 
-            this.personalExpensesTextBox.Location = new System.Drawing.Point(364, 105);
+            this.personalExpensesTextBox.Location = new System.Drawing.Point(614, 105);
             this.personalExpensesTextBox.Name = "personalExpensesTextBox";
             this.personalExpensesTextBox.Size = new System.Drawing.Size(100, 22);
             this.personalExpensesTextBox.TabIndex = 46;
@@ -164,31 +186,31 @@
             // personalExpensesLabel
             // 
             this.personalExpensesLabel.AutoSize = true;
-            this.personalExpensesLabel.Location = new System.Drawing.Point(248, 108);
+            this.personalExpensesLabel.Location = new System.Drawing.Point(498, 108);
             this.personalExpensesLabel.Name = "personalExpensesLabel";
             this.personalExpensesLabel.Size = new System.Drawing.Size(109, 17);
             this.personalExpensesLabel.TabIndex = 45;
             this.personalExpensesLabel.Text = "Personal burn $";
             // 
-            // weeksToSellTextBox
+            // weeksToSellLowTextBox
             // 
-            this.weeksToSellTextBox.Location = new System.Drawing.Point(112, 105);
-            this.weeksToSellTextBox.Name = "weeksToSellTextBox";
-            this.weeksToSellTextBox.Size = new System.Drawing.Size(46, 22);
-            this.weeksToSellTextBox.TabIndex = 44;
+            this.weeksToSellLowTextBox.Location = new System.Drawing.Point(133, 105);
+            this.weeksToSellLowTextBox.Name = "weeksToSellLowTextBox";
+            this.weeksToSellLowTextBox.Size = new System.Drawing.Size(46, 22);
+            this.weeksToSellLowTextBox.TabIndex = 44;
             // 
-            // weeksToSellLabel
+            // weeksToSellLowLabel
             // 
-            this.weeksToSellLabel.AutoSize = true;
-            this.weeksToSellLabel.Location = new System.Drawing.Point(15, 108);
-            this.weeksToSellLabel.Name = "weeksToSellLabel";
-            this.weeksToSellLabel.Size = new System.Drawing.Size(92, 17);
-            this.weeksToSellLabel.TabIndex = 43;
-            this.weeksToSellLabel.Text = "Weeks to sell";
+            this.weeksToSellLowLabel.AutoSize = true;
+            this.weeksToSellLowLabel.Location = new System.Drawing.Point(15, 108);
+            this.weeksToSellLowLabel.Name = "weeksToSellLowLabel";
+            this.weeksToSellLowLabel.Size = new System.Drawing.Size(105, 17);
+            this.weeksToSellLowLabel.TabIndex = 43;
+            this.weeksToSellLowLabel.Text = "Weeks/sale low";
             // 
             // highWinningBidAmountTextBox
             // 
-            this.highWinningBidAmountTextBox.Location = new System.Drawing.Point(817, 61);
+            this.highWinningBidAmountTextBox.Location = new System.Drawing.Point(837, 61);
             this.highWinningBidAmountTextBox.Name = "highWinningBidAmountTextBox";
             this.highWinningBidAmountTextBox.Size = new System.Drawing.Size(100, 22);
             this.highWinningBidAmountTextBox.TabIndex = 42;
@@ -196,7 +218,7 @@
             // highWinningBidAmountLabel
             // 
             this.highWinningBidAmountLabel.AutoSize = true;
-            this.highWinningBidAmountLabel.Location = new System.Drawing.Point(720, 64);
+            this.highWinningBidAmountLabel.Location = new System.Drawing.Point(740, 64);
             this.highWinningBidAmountLabel.Name = "highWinningBidAmountLabel";
             this.highWinningBidAmountLabel.Size = new System.Drawing.Size(96, 17);
             this.highWinningBidAmountLabel.TabIndex = 41;
@@ -204,7 +226,7 @@
             // 
             // lowWinningBidAmountTextBox
             // 
-            this.lowWinningBidAmountTextBox.Location = new System.Drawing.Point(595, 61);
+            this.lowWinningBidAmountTextBox.Location = new System.Drawing.Point(614, 61);
             this.lowWinningBidAmountTextBox.Name = "lowWinningBidAmountTextBox";
             this.lowWinningBidAmountTextBox.Size = new System.Drawing.Size(100, 22);
             this.lowWinningBidAmountTextBox.TabIndex = 40;
@@ -220,7 +242,7 @@
             // 
             // profitHighTextBox
             // 
-            this.profitHighTextBox.Location = new System.Drawing.Point(817, 20);
+            this.profitHighTextBox.Location = new System.Drawing.Point(837, 20);
             this.profitHighTextBox.Name = "profitHighTextBox";
             this.profitHighTextBox.Size = new System.Drawing.Size(100, 22);
             this.profitHighTextBox.TabIndex = 38;
@@ -228,7 +250,7 @@
             // profitHighLabel
             // 
             this.profitHighLabel.AutoSize = true;
-            this.profitHighLabel.Location = new System.Drawing.Point(720, 23);
+            this.profitHighLabel.Location = new System.Drawing.Point(740, 23);
             this.profitHighLabel.Name = "profitHighLabel";
             this.profitHighLabel.Size = new System.Drawing.Size(72, 17);
             this.profitHighLabel.TabIndex = 37;
@@ -236,7 +258,7 @@
             // 
             // profitLowTextBox
             // 
-            this.profitLowTextBox.Location = new System.Drawing.Point(595, 20);
+            this.profitLowTextBox.Location = new System.Drawing.Point(614, 20);
             this.profitLowTextBox.Name = "profitLowTextBox";
             this.profitLowTextBox.Size = new System.Drawing.Size(100, 22);
             this.profitLowTextBox.TabIndex = 36;
@@ -252,7 +274,7 @@
             // 
             // winningBidsHighTextBox
             // 
-            this.winningBidsHighTextBox.Location = new System.Drawing.Point(364, 61);
+            this.winningBidsHighTextBox.Location = new System.Drawing.Point(394, 61);
             this.winningBidsHighTextBox.Name = "winningBidsHighTextBox";
             this.winningBidsHighTextBox.Size = new System.Drawing.Size(47, 22);
             this.winningBidsHighTextBox.TabIndex = 34;
@@ -260,7 +282,7 @@
             // winningBidsHighLabel
             // 
             this.winningBidsHighLabel.AutoSize = true;
-            this.winningBidsHighLabel.Location = new System.Drawing.Point(248, 64);
+            this.winningBidsHighLabel.Location = new System.Drawing.Point(267, 64);
             this.winningBidsHighLabel.Name = "winningBidsHighLabel";
             this.winningBidsHighLabel.Size = new System.Drawing.Size(94, 17);
             this.winningBidsHighLabel.TabIndex = 33;
@@ -268,7 +290,7 @@
             // 
             // winningBidsLowTextBox
             // 
-            this.winningBidsLowTextBox.Location = new System.Drawing.Point(112, 61);
+            this.winningBidsLowTextBox.Location = new System.Drawing.Point(133, 61);
             this.winningBidsLowTextBox.Name = "winningBidsLowTextBox";
             this.winningBidsLowTextBox.Size = new System.Drawing.Size(46, 22);
             this.winningBidsLowTextBox.TabIndex = 32;
@@ -284,7 +306,7 @@
             // 
             // maxInventoryTextBox
             // 
-            this.maxInventoryTextBox.Location = new System.Drawing.Point(364, 20);
+            this.maxInventoryTextBox.Location = new System.Drawing.Point(394, 20);
             this.maxInventoryTextBox.Name = "maxInventoryTextBox";
             this.maxInventoryTextBox.Size = new System.Drawing.Size(47, 22);
             this.maxInventoryTextBox.TabIndex = 30;
@@ -292,7 +314,7 @@
             // maxInventoryLabel
             // 
             this.maxInventoryLabel.AutoSize = true;
-            this.maxInventoryLabel.Location = new System.Drawing.Point(248, 23);
+            this.maxInventoryLabel.Location = new System.Drawing.Point(267, 23);
             this.maxInventoryLabel.Name = "maxInventoryLabel";
             this.maxInventoryLabel.Size = new System.Drawing.Size(95, 17);
             this.maxInventoryLabel.TabIndex = 29;
@@ -311,7 +333,7 @@
             // 
             // startingCashTextBox
             // 
-            this.startingCashTextBox.Location = new System.Drawing.Point(112, 20);
+            this.startingCashTextBox.Location = new System.Drawing.Point(133, 20);
             this.startingCashTextBox.Name = "startingCashTextBox";
             this.startingCashTextBox.Size = new System.Drawing.Size(100, 22);
             this.startingCashTextBox.TabIndex = 27;
@@ -327,6 +349,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cashPlusAssetsLabel);
+            this.panel2.Controls.Add(this.cashPlusAssetsTextBox);
             this.panel2.Controls.Add(this.totalPersonalBurnLabel);
             this.panel2.Controls.Add(this.totalPersonalBurnTextbox);
             this.panel2.Controls.Add(this.currentCashLockedTextbox);
@@ -344,6 +368,25 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(947, 166);
             this.panel2.TabIndex = 47;
+            // 
+            // totalPersonalBurnLabel
+            // 
+            this.totalPersonalBurnLabel.AutoSize = true;
+            this.totalPersonalBurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPersonalBurnLabel.Location = new System.Drawing.Point(550, 22);
+            this.totalPersonalBurnLabel.Name = "totalPersonalBurnLabel";
+            this.totalPersonalBurnLabel.Size = new System.Drawing.Size(144, 17);
+            this.totalPersonalBurnLabel.TabIndex = 16;
+            this.totalPersonalBurnLabel.Text = "Total personal burn $";
+            // 
+            // totalPersonalBurnTextbox
+            // 
+            this.totalPersonalBurnTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPersonalBurnTextbox.Location = new System.Drawing.Point(701, 19);
+            this.totalPersonalBurnTextbox.Name = "totalPersonalBurnTextbox";
+            this.totalPersonalBurnTextbox.ReadOnly = true;
+            this.totalPersonalBurnTextbox.Size = new System.Drawing.Size(88, 22);
+            this.totalPersonalBurnTextbox.TabIndex = 17;
             // 
             // currentCashLockedTextbox
             // 
@@ -433,17 +476,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Interactive";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(964, 462);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Plot";
-            // 
             // ledgerTextBox
             // 
             this.ledgerTextBox.BackColor = System.Drawing.Color.Black;
@@ -457,24 +489,35 @@
             this.ledgerTextBox.TabIndex = 16;
             this.ledgerTextBox.Text = "";
             // 
-            // totalPersonalBurnLabel
+            // tabPage2
             // 
-            this.totalPersonalBurnLabel.AutoSize = true;
-            this.totalPersonalBurnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPersonalBurnLabel.Location = new System.Drawing.Point(550, 22);
-            this.totalPersonalBurnLabel.Name = "totalPersonalBurnLabel";
-            this.totalPersonalBurnLabel.Size = new System.Drawing.Size(144, 17);
-            this.totalPersonalBurnLabel.TabIndex = 16;
-            this.totalPersonalBurnLabel.Text = "Total personal burn $";
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(971, 462);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Plot";
             // 
-            // totalPersonalBurnTextbox
+            // cashPlusAssetsLabel
             // 
-            this.totalPersonalBurnTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPersonalBurnTextbox.Location = new System.Drawing.Point(701, 19);
-            this.totalPersonalBurnTextbox.Name = "totalPersonalBurnTextbox";
-            this.totalPersonalBurnTextbox.ReadOnly = true;
-            this.totalPersonalBurnTextbox.Size = new System.Drawing.Size(88, 22);
-            this.totalPersonalBurnTextbox.TabIndex = 17;
+            this.cashPlusAssetsLabel.AutoSize = true;
+            this.cashPlusAssetsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashPlusAssetsLabel.Location = new System.Drawing.Point(550, 128);
+            this.cashPlusAssetsLabel.Name = "cashPlusAssetsLabel";
+            this.cashPlusAssetsLabel.Size = new System.Drawing.Size(110, 17);
+            this.cashPlusAssetsLabel.TabIndex = 19;
+            this.cashPlusAssetsLabel.Text = "Cash + assets";
+            // 
+            // cashPlusAssetsTextBox
+            // 
+            this.cashPlusAssetsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashPlusAssetsTextBox.Location = new System.Drawing.Point(701, 125);
+            this.cashPlusAssetsTextBox.Name = "cashPlusAssetsTextBox";
+            this.cashPlusAssetsTextBox.ReadOnly = true;
+            this.cashPlusAssetsTextBox.Size = new System.Drawing.Size(88, 22);
+            this.cashPlusAssetsTextBox.TabIndex = 18;
             // 
             // MainWindow
             // 
@@ -504,8 +547,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox personalExpensesTextBox;
         private System.Windows.Forms.Label personalExpensesLabel;
-        private System.Windows.Forms.TextBox weeksToSellTextBox;
-        private System.Windows.Forms.Label weeksToSellLabel;
+        private System.Windows.Forms.TextBox weeksToSellLowTextBox;
+        private System.Windows.Forms.Label weeksToSellLowLabel;
         private System.Windows.Forms.TextBox highWinningBidAmountTextBox;
         private System.Windows.Forms.Label highWinningBidAmountLabel;
         private System.Windows.Forms.TextBox lowWinningBidAmountTextBox;
@@ -537,5 +580,9 @@
         private System.Windows.Forms.RichTextBox ledgerTextBox;
         private System.Windows.Forms.Label totalPersonalBurnLabel;
         private System.Windows.Forms.TextBox totalPersonalBurnTextbox;
+        private System.Windows.Forms.TextBox weeksToSellHighTextBox;
+        private System.Windows.Forms.Label weeksToSellHighLabel;
+        private System.Windows.Forms.Label cashPlusAssetsLabel;
+        private System.Windows.Forms.TextBox cashPlusAssetsTextBox;
     }
 }

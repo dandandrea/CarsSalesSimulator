@@ -7,6 +7,7 @@
         public int SaleProfitHigh { get; set; }
         public int StartingCash { get; set; }
         public int WeeklyPersonalExpenses { get; set; }
-        public int MaxWeeksForCarToSell { get; set; }
+        public int WeeksForCarToSellLow { get; set; }
+        public int WeeksForCarToSellHigh { get; set; }
     }
 }
