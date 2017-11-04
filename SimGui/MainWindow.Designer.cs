@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.currentCashLabel = new System.Windows.Forms.Label();
             this.currentCashTextBox = new System.Windows.Forms.TextBox();
             this.nextWeekButton = new System.Windows.Forms.Button();
@@ -54,10 +56,12 @@
             this.winningBidsLowLabel = new System.Windows.Forms.Label();
             this.maxInventoryTextBox = new System.Windows.Forms.TextBox();
             this.maxInventoryLabel = new System.Windows.Forms.Label();
-            this.startButton = new System.Windows.Forms.Button();
             this.startingCashTextBox = new System.Windows.Forms.TextBox();
             this.startingCashLabel = new System.Windows.Forms.Label();
+            this.startButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cashPlusAssetsLabel = new System.Windows.Forms.Label();
+            this.cashPlusAssetsTextBox = new System.Windows.Forms.TextBox();
             this.totalPersonalBurnLabel = new System.Windows.Forms.Label();
             this.totalPersonalBurnTextbox = new System.Windows.Forms.TextBox();
             this.currentCashLockedTextbox = new System.Windows.Forms.TextBox();
@@ -66,17 +70,23 @@
             this.currentCashLockedLabel = new System.Windows.Forms.Label();
             this.currentInventoryTextBox = new System.Windows.Forms.TextBox();
             this.currentInventoryLabel = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.lotDisplayPanel = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ledgerTextBox = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.cashPlusAssetsLabel = new System.Windows.Forms.Label();
-            this.cashPlusAssetsTextBox = new System.Windows.Forms.TextBox();
+            this.numberOfSimulationsTextBox = new System.Windows.Forms.TextBox();
+            this.numberOfSimulationsLabel = new System.Windows.Forms.Label();
+            this.numberOfWeeksTextbox = new System.Windows.Forms.TextBox();
+            this.dealershipChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.numberOfWeeksLabel = new System.Windows.Forms.Label();
+            this.plotButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dealershipChart)).BeginInit();
             this.SuspendLayout();
             // 
             // currentCashLabel
@@ -102,7 +112,7 @@
             // 
             this.nextWeekButton.BackColor = System.Drawing.Color.Green;
             this.nextWeekButton.Enabled = false;
-            this.nextWeekButton.Location = new System.Drawing.Point(18, 80);
+            this.nextWeekButton.Location = new System.Drawing.Point(117, 80);
             this.nextWeekButton.Name = "nextWeekButton";
             this.nextWeekButton.Size = new System.Drawing.Size(88, 38);
             this.nextWeekButton.TabIndex = 5;
@@ -152,12 +162,11 @@
             this.panel1.Controls.Add(this.winningBidsLowLabel);
             this.panel1.Controls.Add(this.maxInventoryTextBox);
             this.panel1.Controls.Add(this.maxInventoryLabel);
-            this.panel1.Controls.Add(this.startButton);
             this.panel1.Controls.Add(this.startingCashTextBox);
             this.panel1.Controls.Add(this.startingCashLabel);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(967, 198);
+            this.panel1.Size = new System.Drawing.Size(967, 148);
             this.panel1.TabIndex = 26;
             // 
             // weeksToSellHighTextBox
@@ -320,17 +329,6 @@
             this.maxInventoryLabel.TabIndex = 29;
             this.maxInventoryLabel.Text = "Max inventory";
             // 
-            // startButton
-            // 
-            this.startButton.BackColor = System.Drawing.Color.Green;
-            this.startButton.Location = new System.Drawing.Point(18, 145);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(88, 38);
-            this.startButton.TabIndex = 28;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = false;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
             // startingCashTextBox
             // 
             this.startingCashTextBox.Location = new System.Drawing.Point(133, 20);
@@ -346,6 +344,17 @@
             this.startingCashLabel.Size = new System.Drawing.Size(91, 17);
             this.startingCashLabel.TabIndex = 26;
             this.startingCashLabel.Text = "Starting cash";
+            // 
+            // startButton
+            // 
+            this.startButton.BackColor = System.Drawing.Color.Green;
+            this.startButton.Location = new System.Drawing.Point(11, 80);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(88, 38);
+            this.startButton.TabIndex = 28;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = false;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // panel2
             // 
@@ -364,10 +373,30 @@
             this.panel2.Controls.Add(this.currentCashLabel);
             this.panel2.Controls.Add(this.weekNumberLabel);
             this.panel2.Controls.Add(this.currentCashTextBox);
+            this.panel2.Controls.Add(this.startButton);
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(947, 166);
             this.panel2.TabIndex = 47;
+            // 
+            // cashPlusAssetsLabel
+            // 
+            this.cashPlusAssetsLabel.AutoSize = true;
+            this.cashPlusAssetsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashPlusAssetsLabel.Location = new System.Drawing.Point(550, 128);
+            this.cashPlusAssetsLabel.Name = "cashPlusAssetsLabel";
+            this.cashPlusAssetsLabel.Size = new System.Drawing.Size(110, 17);
+            this.cashPlusAssetsLabel.TabIndex = 19;
+            this.cashPlusAssetsLabel.Text = "Cash + assets";
+            // 
+            // cashPlusAssetsTextBox
+            // 
+            this.cashPlusAssetsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cashPlusAssetsTextBox.Location = new System.Drawing.Point(701, 125);
+            this.cashPlusAssetsTextBox.Name = "cashPlusAssetsTextBox";
+            this.cashPlusAssetsTextBox.ReadOnly = true;
+            this.cashPlusAssetsTextBox.Size = new System.Drawing.Size(88, 22);
+            this.cashPlusAssetsTextBox.TabIndex = 18;
             // 
             // totalPersonalBurnLabel
             // 
@@ -441,14 +470,15 @@
             this.currentInventoryLabel.TabIndex = 8;
             this.currentInventoryLabel.Text = "# cars on lot";
             // 
-            // panel3
+            // lotDisplayPanel
             // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(6, 178);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(477, 271);
-            this.panel3.TabIndex = 48;
+            this.lotDisplayPanel.BackColor = System.Drawing.Color.Black;
+            this.lotDisplayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lotDisplayPanel.Location = new System.Drawing.Point(6, 178);
+            this.lotDisplayPanel.Name = "lotDisplayPanel";
+            this.lotDisplayPanel.Size = new System.Drawing.Size(477, 271);
+            this.lotDisplayPanel.TabIndex = 48;
+            this.lotDisplayPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.lotDisplayPanel_Paint);
             // 
             // tabControl1
             // 
@@ -459,7 +489,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(979, 491);
+            this.tabControl1.Size = new System.Drawing.Size(1363, 608);
             this.tabControl1.TabIndex = 47;
             // 
             // tabPage1
@@ -468,11 +498,11 @@
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage1.Controls.Add(this.ledgerTextBox);
             this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.panel3);
+            this.tabPage1.Controls.Add(this.lotDisplayPanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(971, 462);
+            this.tabPage1.Size = new System.Drawing.Size(1355, 579);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Interactive";
             // 
@@ -493,40 +523,85 @@
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Controls.Add(this.numberOfSimulationsTextBox);
+            this.tabPage2.Controls.Add(this.numberOfSimulationsLabel);
+            this.tabPage2.Controls.Add(this.numberOfWeeksTextbox);
+            this.tabPage2.Controls.Add(this.dealershipChart);
+            this.tabPage2.Controls.Add(this.numberOfWeeksLabel);
+            this.tabPage2.Controls.Add(this.plotButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(971, 462);
+            this.tabPage2.Size = new System.Drawing.Size(1355, 579);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Plot";
             // 
-            // cashPlusAssetsLabel
+            // numberOfSimulationsTextBox
             // 
-            this.cashPlusAssetsLabel.AutoSize = true;
-            this.cashPlusAssetsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cashPlusAssetsLabel.Location = new System.Drawing.Point(550, 128);
-            this.cashPlusAssetsLabel.Name = "cashPlusAssetsLabel";
-            this.cashPlusAssetsLabel.Size = new System.Drawing.Size(110, 17);
-            this.cashPlusAssetsLabel.TabIndex = 19;
-            this.cashPlusAssetsLabel.Text = "Cash + assets";
+            this.numberOfSimulationsTextBox.Location = new System.Drawing.Point(240, 20);
+            this.numberOfSimulationsTextBox.Name = "numberOfSimulationsTextBox";
+            this.numberOfSimulationsTextBox.Size = new System.Drawing.Size(46, 22);
+            this.numberOfSimulationsTextBox.TabIndex = 53;
+            this.numberOfSimulationsTextBox.Text = "1";
             // 
-            // cashPlusAssetsTextBox
+            // numberOfSimulationsLabel
             // 
-            this.cashPlusAssetsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cashPlusAssetsTextBox.Location = new System.Drawing.Point(701, 125);
-            this.cashPlusAssetsTextBox.Name = "cashPlusAssetsTextBox";
-            this.cashPlusAssetsTextBox.ReadOnly = true;
-            this.cashPlusAssetsTextBox.Size = new System.Drawing.Size(88, 22);
-            this.cashPlusAssetsTextBox.TabIndex = 18;
+            this.numberOfSimulationsLabel.AutoSize = true;
+            this.numberOfSimulationsLabel.Location = new System.Drawing.Point(144, 25);
+            this.numberOfSimulationsLabel.Name = "numberOfSimulationsLabel";
+            this.numberOfSimulationsLabel.Size = new System.Drawing.Size(90, 17);
+            this.numberOfSimulationsLabel.TabIndex = 52;
+            this.numberOfSimulationsLabel.Text = "# simulations";
+            // 
+            // numberOfWeeksTextbox
+            // 
+            this.numberOfWeeksTextbox.Location = new System.Drawing.Point(79, 20);
+            this.numberOfWeeksTextbox.Name = "numberOfWeeksTextbox";
+            this.numberOfWeeksTextbox.Size = new System.Drawing.Size(46, 22);
+            this.numberOfWeeksTextbox.TabIndex = 50;
+            this.numberOfWeeksTextbox.Text = "52";
+            // 
+            // dealershipChart
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.dealershipChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.dealershipChart.Legends.Add(legend2);
+            this.dealershipChart.Location = new System.Drawing.Point(17, 78);
+            this.dealershipChart.Name = "dealershipChart";
+            this.dealershipChart.Size = new System.Drawing.Size(1314, 478);
+            this.dealershipChart.TabIndex = 51;
+            // 
+            // numberOfWeeksLabel
+            // 
+            this.numberOfWeeksLabel.AutoSize = true;
+            this.numberOfWeeksLabel.Location = new System.Drawing.Point(14, 23);
+            this.numberOfWeeksLabel.Name = "numberOfWeeksLabel";
+            this.numberOfWeeksLabel.Size = new System.Drawing.Size(59, 17);
+            this.numberOfWeeksLabel.TabIndex = 49;
+            this.numberOfWeeksLabel.Text = "# weeks";
+            // 
+            // plotButton
+            // 
+            this.plotButton.BackColor = System.Drawing.Color.Lime;
+            this.plotButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plotButton.Location = new System.Drawing.Point(315, 15);
+            this.plotButton.Name = "plotButton";
+            this.plotButton.Size = new System.Drawing.Size(125, 36);
+            this.plotButton.TabIndex = 50;
+            this.plotButton.Text = "Plot";
+            this.plotButton.UseVisualStyleBackColor = false;
+            this.plotButton.Click += new System.EventHandler(this.plotButton_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 723);
+            this.ClientSize = new System.Drawing.Size(1381, 876);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Car Sales Simulator";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -534,6 +609,9 @@
             this.panel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dealershipChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -569,7 +647,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox currentInventoryTextBox;
         private System.Windows.Forms.Label currentInventoryLabel;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel lotDisplayPanel;
         private System.Windows.Forms.Label currentCashLockedLabel;
         private System.Windows.Forms.TextBox currentCashLockedTextbox;
         private System.Windows.Forms.Label currentTotalAssetsLabel;
@@ -584,5 +662,11 @@
         private System.Windows.Forms.Label weeksToSellHighLabel;
         private System.Windows.Forms.Label cashPlusAssetsLabel;
         private System.Windows.Forms.TextBox cashPlusAssetsTextBox;
+        private System.Windows.Forms.Button plotButton;
+        private System.Windows.Forms.DataVisualization.Charting.Chart dealershipChart;
+        private System.Windows.Forms.TextBox numberOfWeeksTextbox;
+        private System.Windows.Forms.Label numberOfWeeksLabel;
+        private System.Windows.Forms.TextBox numberOfSimulationsTextBox;
+        private System.Windows.Forms.Label numberOfSimulationsLabel;
     }
 }

@@ -3,14 +3,15 @@ using SimEngine.Dealership;
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace SimGui
 {
     public partial class MainWindow : Form
     {
         private IDealership _dealership;
-        private IAuctionHouse _auctionHouse;
 
         private bool _started = false;
 
@@ -26,6 +27,8 @@ namespace SimGui
         private const int WEEKS_FOR_CAR_TO_SELL_HIGH = 4;
         private const int WEEKLY_PERSONAL_EXPENSES = 750;
 
+        private const int SIMULATION_RANDOMNESS_DELAY = 20;
+
         public MainWindow()
         {
             // Auto-generated
@@ -38,9 +41,8 @@ namespace SimGui
 
         private void InitializeForm()
         {
-            InitializeDealership();
+            _dealership = GetDealership();
             SetControlsToStoppedState();
-            UpdateLotDisplay();
             _started = false;
         }
 
@@ -61,8 +63,7 @@ namespace SimGui
             _started = true;
 
             // Initialize the dealership and lot display
-            InitializeDealership();
-            UpdateLotDisplay();
+            _dealership = GetDealership();
 
             // Simulate the first week
             Crank();
@@ -84,28 +85,14 @@ namespace SimGui
 
             // Update display
             UpdateDealershipDisplayValues(weeklyResult);
-            UpdateLotDisplay();
             UpdateLedgerDisplay();
+
+            lotDisplayPanel.Invalidate();
         }
 
-        private void UpdateLedgerDisplay()
+        private void lotDisplayPanel_Paint(object sender, PaintEventArgs e)
         {
-            ledgerTextBox.AppendText($"Week {weekNumberTextBox.Text}\n");
-
-            foreach (var entry in _dealership.GetLedger().GetEntries().Where(x => x.WeekNumber == Int32.Parse(weekNumberTextBox.Text)))
-            {
-                var color = entry.Direction == SimEngine.Ledger.EntryDirection.CREDIT ? Color.Green : Color.OrangeRed;
-                ledgerTextBox.SelectionColor = color;
-                ledgerTextBox.AppendText($"{entry}\n");
-            }
-
-            ledgerTextBox.AppendText("\n");
-            ledgerTextBox.ScrollToCaret();
-        }
-
-        private void UpdateLotDisplay()
-        {
-            using (var g = panel3.CreateGraphics())
+            using (var g = lotDisplayPanel.CreateGraphics())
             {
                 // Clear the lot first
                 g.Clear(Color.Black);
@@ -124,6 +111,21 @@ namespace SimGui
             }
         }
 
+        private void UpdateLedgerDisplay()
+        {
+            ledgerTextBox.AppendText($"Week {weekNumberTextBox.Text}\n");
+
+            foreach (var entry in _dealership.GetLedger().GetEntries().Where(x => x.WeekNumber == Int32.Parse(weekNumberTextBox.Text)))
+            {
+                var color = entry.Direction == SimEngine.Ledger.EntryDirection.CREDIT ? Color.Green : Color.OrangeRed;
+                ledgerTextBox.SelectionColor = color;
+                ledgerTextBox.AppendText($"{entry}\n");
+            }
+
+            ledgerTextBox.AppendText("\n");
+            ledgerTextBox.ScrollToCaret();
+        }
+
         private void UpdateDealershipDisplayValues(WeeklyResult weeklyResult)
         {
             currentCashTextBox.Text = $"{weeklyResult.CashOnHand}";
@@ -134,20 +136,61 @@ namespace SimGui
             cashPlusAssetsTextBox.Text = $"{weeklyResult.CashOnHand + weeklyResult.TotalAssets}";
         }
 
-        private void InitializeDealership()
+        private void plotButton_Click(object sender, EventArgs e)
         {
-            // Auction house
-            var auctionParams = new AuctionParameters
-            {
-                NumberOfWinningBidsLow = Int32.Parse(winningBidsLowTextBox.Text),
-                NumberOfWinningBidsHigh = Int32.Parse(winningBidsHighTextBox.Text),
-                TotalPurchasePriceLow = Int32.Parse(lowWinningBidAmountTextBox.Text),
-                TotalPurchasePriceHigh = Int32.Parse(highWinningBidAmountTextBox.Text),
-                MaxInventory = Int32.Parse(maxInventoryTextBox.Text)
-            };
-            _auctionHouse = new TypicalAuctionHouse(auctionParams);
+            // TODO: Validate input
+            var numberOfWeeks = Int32.Parse(numberOfWeeksTextbox.Text);
+            var numberOfSimulations = Int32.Parse(numberOfSimulationsTextBox.Text);
 
-            // Dealership
+            // Update "Plot" button
+            plotButton.Enabled = false;
+            var originalPlotButtonText = plotButton.Text;
+            var originalPlotButtonColor = plotButton.BackColor;
+            plotButton.Text = "Simulating...";
+            plotButton.BackColor = Color.Yellow;
+            plotButton.Update();
+
+            // Initialize chart
+            dealershipChart.Series.Clear();
+
+            // Simulate and plot
+            for (var simulationNumber = 1; simulationNumber <= numberOfSimulations; simulationNumber++)
+            {
+                // Initialize chart control series
+                var cashOnHandSeries = dealershipChart.Series.Add($"Cash {simulationNumber}");
+                var totalAssetsSeries = dealershipChart.Series.Add($"Assets {simulationNumber}");
+                cashOnHandSeries.Color = Color.Blue;
+                totalAssetsSeries.Color = Color.Green;
+                cashOnHandSeries.ChartType = SeriesChartType.Line;
+                totalAssetsSeries.ChartType = SeriesChartType.Line;
+
+                // Initialize dealership
+                var dealership = GetDealership();
+
+                // Simulate each week
+                for (var weekNumber = 1; weekNumber <= numberOfWeeks; weekNumber++)
+                {
+                    // Simulate
+                    var result = dealership.Crank(weekNumber);
+
+                    // Plot
+                    cashOnHandSeries.Points.AddXY(weekNumber, result.CashOnHand);
+                    totalAssetsSeries.Points.AddXY(weekNumber, result.TotalAssets);
+                }
+
+                // Slow down a bit to help with randomness
+                Thread.Sleep(SIMULATION_RANDOMNESS_DELAY);
+            }
+
+            // Update "Plot" button
+            plotButton.Text = originalPlotButtonText;
+            plotButton.BackColor = originalPlotButtonColor;
+            plotButton.Enabled = true;
+            plotButton.Update();
+        }
+
+        private IDealership GetDealership()
+        {
             var dealershipParams = new DealershipParameters
             {
                 StartingCash = Int32.Parse(startingCashTextBox.Text),
@@ -157,7 +200,18 @@ namespace SimGui
                 WeeksForCarToSellLow = Int32.Parse(weeksToSellLowTextBox.Text),
                 WeeksForCarToSellHigh = Int32.Parse(weeksToSellHighTextBox.Text)
             };
-            _dealership = new TypicalDealership(dealershipParams, _auctionHouse);
+
+            var auctionParams = new AuctionParameters
+            {
+                NumberOfWinningBidsLow = Int32.Parse(winningBidsLowTextBox.Text),
+                NumberOfWinningBidsHigh = Int32.Parse(winningBidsHighTextBox.Text),
+                TotalPurchasePriceLow = Int32.Parse(lowWinningBidAmountTextBox.Text),
+                TotalPurchasePriceHigh = Int32.Parse(highWinningBidAmountTextBox.Text),
+                MaxInventory = Int32.Parse(maxInventoryTextBox.Text)
+            };
+
+            var auctionHouse = new TypicalAuctionHouse(auctionParams);
+            return new TypicalDealership(dealershipParams, auctionHouse);
         }
 
         private void SetControlsToRunningState()
